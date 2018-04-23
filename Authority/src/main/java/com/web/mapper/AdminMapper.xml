@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="Admin">
+    <id column="adminId" jdbcType="INTEGER" property="adminId" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="loginPwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="roleId" jdbcType="INTEGER" property="roleId" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="loginIp" jdbcType="VARCHAR" property="loginIp" />
+    <result column="loginTime" jdbcType="DATE" property="loginTime" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    adminId, loginName, loginPwd, sex, age, roleId, state, loginIp, loginTime, phone
+  </sql>
+  <select id="selectByExample" parameterType="AdminExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where adminId = #{adminId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where adminId = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="AdminExample">
+    delete from admin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="Admin">
+    insert into admin (adminId, loginName, loginPwd, 
+      sex, age, roleId, state, 
+      loginIp, loginTime, phone
+      )
+    values (#{adminId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=DATE}, #{phone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="Admin">
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adminId != null">
+        adminId,
+      </if>
+      <if test="loginName != null">
+        loginName,
+      </if>
+      <if test="loginPwd != null">
+        loginPwd,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="roleId != null">
+        roleId,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="loginIp != null">
+        loginIp,
+      </if>
+      <if test="loginTime != null">
+        loginTime,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=DATE},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="AdminExample" resultType="java.lang.Long">
+    select count(*) from admin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admin
+    <set>
+      <if test="record.adminId != null">
+        adminId = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginName != null">
+        loginName = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginPwd != null">
+        loginPwd = #{record.loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null">
+        roleId = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginIp != null">
+        loginIp = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginTime != null">
+        loginTime = #{record.loginTime,jdbcType=DATE},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admin
+    set adminId = #{record.adminId,jdbcType=INTEGER},
+      loginName = #{record.loginName,jdbcType=VARCHAR},
+      loginPwd = #{record.loginPwd,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      roleId = #{record.roleId,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
+      loginIp = #{record.loginIp,jdbcType=VARCHAR},
+      loginTime = #{record.loginTime,jdbcType=DATE},
+      phone = #{record.phone,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="Admin">
+    update admin
+    <set>
+      <if test="loginName != null">
+        loginName = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        loginPwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        roleId = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null">
+        loginIp = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        loginTime = #{loginTime,jdbcType=DATE},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where adminId = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="Admin">
+    update admin
+    set loginName = #{loginName,jdbcType=VARCHAR},
+      loginPwd = #{loginPwd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      roleId = #{roleId,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      loginIp = #{loginIp,jdbcType=VARCHAR},
+      loginTime = #{loginTime,jdbcType=DATE},
+      phone = #{phone,jdbcType=VARCHAR}
+    where adminId = #{adminId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 登录 -->
+  <select id="login" resultType="Admin">
+  select * from admin where loginName=#{loginName} and loginPwd=#{loginPwd}
+  </select>
+  
+</mapper>
