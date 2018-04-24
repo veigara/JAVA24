@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.web.entity.Car" table="t_car">
+         <id name="cid"><!--  column="cid"可以省略 -->
+             <generator class="native">
+              </generator><!-- generator：生成策略：
+             identity,native,increment,uuid,guid,sequence等 -->
+         </id>
+    
+        <property name="cname" column="cname" length="30" not-null="true"></property>
+        
+        <!-- 多对多  table:中间表 -->
+        <set name="passenSet" table="t_car_passenger">
+             <key column="carId"></key>
+             <many-to-many class="com.web.entity.Passenger" column="passenId"></many-to-many>
+        </set>
+        
+    </class>
+
+</hibernate-mapping>

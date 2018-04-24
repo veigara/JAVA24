@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.web.entity.Classes" table="t_classes">
+         <id name="cid"><!--  column="cid"可以省略 -->
+             <generator class="native">
+              </generator><!-- generator：生成策略：
+             identity,native,increment,uuid,guid,sequence等 -->
+         </id>
+    
+        <property name="cname" column="cname" length="30" not-null="true"></property>
+        
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.web.entity.Teacher" table="t_teacher">
+         <id name="tid"><!--  column="cid"可以省略 -->
+             <generator class="native">
+              </generator><!-- generator：生成策略：
+             identity,native,increment,uuid,guid,sequence等 -->
+         </id>
+    
+        <property name="tname" column="tname" length="30" not-null="true"></property>
+      
+      <!-- set:集合    key:外键    one-to-many:一对多 
+        
+         <list name="clist">
+             <key column="teacherId"></key>
+             <index></index>注意index是数据库中的关键字要避免与其冲突，此处index_对应元素在List中的索引  
+             <one-to-many class="com.web.entity.Classes"/>
+        </list>
+      -->
+      <set name="clist">
+             <key column="teacherId"></key>
+             <one-to-many class="com.web.entity.Classes"/>
+        </set>
+
+       
+      
+    </class>
+
+</hibernate-mapping>

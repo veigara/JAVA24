@@ -20,10 +20,6 @@ import com.web.util.HibernateUtil;
 public class TestHibernate1 {
 
 	@Test
-	/**
-	 * 插入数据
-	 * @throws Exception
-	 */
 	public void testAuto() throws Exception {
 		//1.读取配置文件
 		Configuration cfg = new Configuration().configure();
@@ -52,9 +48,11 @@ public class TestHibernate1 {
 		//持久化操作
 		
 		//持久化状态
-		session.save(c);//插入数据
+		session.save(c);
 		
-	
+		//持久化状态
+		c.setCname("戴尔");
+		
 		//事务的提交
 		trans.commit();
 		
@@ -63,10 +61,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * get（）根据id主键查询，不具有延迟性
-	 * @throws Exception
-	 */
 	public void testGet() throws Exception {
 		
 		Session session = null;
@@ -80,7 +74,7 @@ public class TestHibernate1 {
 			 trans = session.beginTransaction();
 			
 			//3.持久化操作
-			Computers c = (Computers) session.get(Computers.class, 1);
+			Computers c = (Computers) session.get(Computers.class, 0);
 			
 			System.out.println("电脑名称:"+c.getCname()+",编号:"+c.getCid());
 			
@@ -92,10 +86,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * load（）根据id主键查询，具有延迟性
-	 * @throws Exception
-	 */
 	public void testLoad() throws Exception {
 		Session session = null;
 		Transaction trans = null;
@@ -120,10 +110,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * 更新
-	 * @throws Exception
-	 */
 	public void testUpdate() throws Exception {
 		Session session = null;
 		Transaction trans = null;
@@ -152,10 +138,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * 删除
-	 * @throws Exception
-	 */
 	public void testDelete() throws Exception {
 		Session session = null;
 		Transaction trans = null;
@@ -180,10 +162,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * 查询
-	 * @throws Exception
-	 */
 	public void testQuery() throws Exception {
 		// sql ： struct query language  查询表
 		//hql: hibernate query language   查询对象
@@ -200,7 +178,7 @@ public class TestHibernate1 {
 			
 			//3.持久化操作
 			 //sql : select * from t_computers
-			 String hql = "from Computers";//注该Computers为实体类，不是数据库中的表
+			 String hql = "from Computers";
 			 
 			 query = session.createQuery(hql);
 			
@@ -218,10 +196,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * 条件查询
-	 * @throws Exception
-	 */
 	public void testQueryByCondition() throws Exception {
 		// sql ： struct query language  查询表
 		//hql: hibernate query language   查询对象
@@ -261,10 +235,6 @@ public class TestHibernate1 {
 	}
 	
 	@Test
-	/**
-	 * 分页查询
-	 * @throws Exception
-	 */
 	public void testPagingQuery() throws Exception {
 		// sql ： struct query language  查询表
 		//hql: hibernate query language   查询对象
@@ -281,7 +251,7 @@ public class TestHibernate1 {
 			
 			//3.持久化操作
 			 //sql : select * from t_computers where cname like '%华%' and csize=14
-			 String hql = "from Computers where cname like ? "//该语句不用写limit,Hibernate自带分页查询
+			 String hql = "from Computers where cname like ? "
 			 		+ "and csize=?";
 			 
 			 query = session.createQuery(hql);

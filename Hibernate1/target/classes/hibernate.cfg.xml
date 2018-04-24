@@ -26,5 +26,13 @@
   <property name="current_session_context_class">thread</property>
   
   <mapping resource="com/web/mapping/Computer.hbm.xml"/>
+  <mapping resource="com/web/mapping/Classes.hbm.xml"/>
+  <mapping resource="com/web/mapping/Teacher.hbm.xml"/>
+<mapping resource="com/web/mapping/Bread.hbm.xml"/>
+<mapping resource="com/web/mapping/Category.hbm.xml"/>
+<mapping resource="com/web/mapping/Menu.hbm.xml"/>
+<mapping resource="com/web/mapping/Role.hbm.xml"/>
+<mapping resource="com/web/mapping/Car.hbm.xml"/>
+<mapping resource="com/web/mapping/Passenger.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

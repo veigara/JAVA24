@@ -1,15 +1,12 @@
 package com.web.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
-
-public class Computers implements Serializable {
+public class Category implements Serializable {
 
 	private Integer cid;
 	private String cname;
-	private Integer csize;
-	private Date cdate;
+	private Bread bread;//多对一      多个类别对应一个面包
 	
 	public Integer getCid() {
 		return cid;
@@ -23,17 +20,11 @@ public class Computers implements Serializable {
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
-	public Integer getCsize() {
-		return csize;
+	public Bread getBread() {
+		return bread;
 	}
-	public void setCsize(Integer csize) {
-		this.csize = csize;
-	}
-	public Date getCdate() {
-		return cdate;
-	}
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
+	public void setBread(Bread bread) {
+		this.bread = bread;
 	}
 	
 	
