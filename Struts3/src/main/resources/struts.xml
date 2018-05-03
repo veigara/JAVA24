@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="myStruts" extends="struts-default" namespace="">
+         
+        <action name="login" class="com.web.controller.UserController" method="login">
+             <result name="success">/main.jsp</result>
+             <result name="login">/login.jsp</result>
+             <result name="input">/login.jsp</result>
+        </action>
+        
+        <action name="queryRole" class="com.web.controller.RoleAction">
+             <result>/cs1.jsp</result>
+        </action>
+        
+        <!-- 上传文件 -->
+        <action name="upload" class="com.web.controller.MyFileUplaodAction">
+            <result>/file.jsp</result>
+        </action>
+        
+        <!-- 下载文件 -->
+        <action name="down" class="com.web.controller.MyFileDownLoadAction">
+            <result name="success" type="stream">
+                 <param name="contentType">image/jpeg</param><!-- 指定下载文件类型 -->
+				 <param name="contentDisposition">attacthment;filename="${fileName}"</param><!-- filename="${fileName}"指定下载文件名 -->
+				 <param name="inputName">inputStream</param>
+				 <param name="bufferSize">1024</param><!--指定下载文件缓存的大小  -->
+            </result>
+        </action>
+    </package>
+
+    <package name="userStruts" extends="struts-default" namespace="">
+          <interceptors>
+              <!-- 自定义的拦截器 -->
+              <interceptor name="AuthInterceptor" class="com.web.interceptor.AuthInterceptor"></interceptor>
+         
+              <!-- 拦截器栈 -->
+              <interceptor-stack name="myStack">
+                     <interceptor-ref name="AuthInterceptor"></interceptor-ref>
+                     
+                     <interceptor-ref name="basicStack"></interceptor-ref>
+              </interceptor-stack>
+          </interceptors>   
+          
+           <default-interceptor-ref name="myStack"/>    
+      
+          <!-- query.action -->
+           <action name="query" class="com.web.controller.UserController" 
+               method="query">
+                <result name="success">/queryUser.jsp</result> 
+                <result name="login">/login.jsp</result>   
+           </action>
+    </package>
+     
+</struts>
