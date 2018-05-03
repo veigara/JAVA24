@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+   <!-- 动态调用 -->
+   <constant name="struts.enable.DynamicMethodInvocation" value="true" /> 
+
+  <!-- name不能为struts-default,名字应该唯一 -->
+   <package name="myStruts" extends="struts-default" namespace="/user">
+   
+         <!-- name：url     login.action
+          method="execute":可以省略-->
+          <action name="login" class="com.web.controller.UserController" 
+                method="execute">
+                
+                <!-- 配置返回页面的结果 -->
+               <result name="success">/main.jsp</result>
+               <result name="login">/login.jsp</result>     
+          </action>
+          
+          <!--访问action的方法:
+           1、指定method方法   user/register.action -->
+          <action name="register" class="com.web.controller.UserController"
+               method="register">
+               
+               <!--  name="success"可以省略 -->
+               <result>/main.jsp</result>    
+           </action>
+          
+           <!--访问action的方法:
+            <constant name="struts.enable.DynamicMethodInvocation" value="true" /> 
+             2、动态调用    user/admin!update
+             -->
+            <action name="admin" class="com.web.controller.UserController">
+                <!--  name="success"可以省略 -->
+               <result>/main.jsp</result>    
+            </action>
+            
+            <!-- -访问action的方法:
+            3、通配符调用    user/User_add.action-->
+            <action name="*_*"  class="com.web.controller.{1}Controller" method="{2}">
+             <!--  name="success"可以省略 -->
+               <result>/main.jsp</result>
+            </action>
+            
+   </package>
+   
+   <!-- 引入外部xml文件 -->
+   <include file="user.xml"></include>
+   
+</struts>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+   <package name="userStruts" extends="struts-default" namespace="/user">
+        
+        
+        <!-- url： user/login1.action -->
+        <action name="login1" class="com.web.controller.LoginController1">
+              <result name="success">/main.jsp</result>
+              <result name="login">/login1.jsp</result>
+        </action>
+        
+        
+        <action name="login2" class="com.web.controller.UserController2">
+                 <result name="success">/main.jsp</result>
+                 <result name="login">/login1.jsp</result>
+        </action>
+   </package>
+  
+</struts>
